@@ -1,0 +1,58 @@
+{% include "header.html" %}
+
+<!-- Page Header-->
+<header
+  class="masthead"
+  style="background-image: url('../static/assets/img/home-bg.jpg')"
+>
+  <div class="container position-relative px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+      <div class="col-md-10 col-lg-8 col-xl-7">
+        <div class="site-heading">
+          <h1>Translated Morse Web</h1>
+          <span class="subheading">ITS Time to Change To Morse</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+<!-- Main Content-->
+<div class="container px-4 px-lg-5">
+  <div class="row gx-4 gx-lg-5 justify-content-center">
+    <div class="col-md-10 col-lg-8 col-xl-7">
+      <!-- Post preview-->
+      {% if all_posts %}
+      {% for post in all_posts %}
+      <div class="post-preview">
+          <h2 class="post-title">{{ post.word }}</h2>
+          <h3 class="post-subtitle">{{ post.translated_word }}</h3>
+          <a href="{{ url_for('ed_post',post_id=post.id) }}">Edit the Word</a>
+        <!-- TODO: Add code to delete posts below -->
+        <p class="post-meta">
+
+          <a href="#">if you wish to delete this translated word press ->  </a>
+          <a href="{{ url_for('delete', post_id=post.id) }}">✘</a>
+        </p>
+      </div>
+      <!-- Divider-->
+      <hr class="my-4" />
+      {% endfor %}
+      {% else %}
+        <h2>Haven't you tried checking the dictionary yet?</h2>
+      {% endif %}
+      <!-- New Post -->
+      <div class="d-flex justify-content-end mb-4">
+      <!-- TODO: Adding new posts -->
+        <a
+            class="btn btn-primary float-right"
+          href="{{ url_for('create_post') }}"
+          >Create New Word</a
+        >
+      </div>
+
+
+    </div>
+  </div>
+</div>
+
+{% include "footer.html" %}
